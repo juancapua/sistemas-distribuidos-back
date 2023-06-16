@@ -4,8 +4,8 @@ from config.db import meta, engine
 
 cabin = Table("cabins", meta,
                Column("id", Integer, primary_key=True),
-                Column("image", String(255)), 
-                Column("available", Boolean), 
-                Column("description", String(255)))
+                Column("name", String(255)), 
+                Column("beds", Integer), 
+                Column("price", Integer))
 
 meta.create_all(engine)
