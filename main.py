@@ -2,8 +2,8 @@ from fastapi import FastAPI, File, UploadFile, Form
 from typing import List
 from fastapi.middleware.cors import CORSMiddleware
 import boto3
-from config.db import conn
-from models.Cabin import cabin
+# from config.db import conn
+# from schemas.Cabin import cabin
 
 app = FastAPI()
 
@@ -23,8 +23,8 @@ app.add_middleware(
 
 # Datos de ejemplo para la lista de usuarios
 users = [
-    {"id": 1, "name": "Francisco cachon", "image": "https://sistemas-distribuidos-users.s3.amazonaws.com/cachimba.jpeg"},
-    {"id": 2, "name": "Dios del fuchibol","image": "https://sistemas-distribuidos-users.s3.amazonaws.com/leo-perfil-2.webp"}
+    {"id": 1, "name": "Cabin 1", "price": 100, "beds": 1, "image": "https://sistemas-distribuidos-users.s3.amazonaws.com/cachimba.jpeg"},
+    {"id": 2, "name": "Cabin 2", "price": 200, "beds": 2, "image": "https://sistemas-distribuidos-users.s3.amazonaws.com/leo-perfil-2.webp"}
 ]
 
 # Endpoint para obtener la lista de usuarios
@@ -37,10 +37,10 @@ async def upload_image(name: str = Form(...), image: UploadFile = File(...)):
     # Guardar la imagen en Amazon S3
     s3.upload_fileobj(image.file, 'sistemas-distribuidos-users', image.filename)
     url = s3.generate_presigned_url('get_object', Params={'Bucket': 'sistemas-distribuidos-users', 'Key': image.filename}, ExpiresIn=3600)
-    users.append({"id": users[-1]['id']+1, "name": name, "image": url})
+    users.append({"id": users[-1]['id']+1, "name": name, "image": url, "price": 100, "beds": 2})
 
     return {"message": "Imagen cargada correctamente"}
 
-@app.get("/cabins")
-async def get_cabins() -> List[dict]:
-    return conn.execute(cabin.select()).fetchall()
+# @app.get("/cabins")
+# async def get_cabins() -> List[dict]:
+#     return conn.execute(cabin.select()).fetchall()

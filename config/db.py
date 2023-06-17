@@ -1,7 +1,7 @@
-from sqlalchemy import create_engine, MetaData
+# from sqlalchemy import create_engine, MetaData
 
-engine = create_engine("postgresql://postgres:postgres@sistemas-distribuidos-db.ctenle4v3yjy.us-east-1.rds.amazonaws.com:5432/initial_db")
+# engine = create_engine("postgresql://postgres:postgres@sistemas-distribuidos-db.ctenle4v3yjy.us-east-1.rds.amazonaws.com:5432/initial_db")
 
-meta = MetaData()
+# meta = MetaData()
 
-conn = engine.connect()
+# conn = engine.connect()
